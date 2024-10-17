@@ -1,7 +1,7 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 <div id="app">
-  <p>{{ titulo }}</p>
+  <p v-once>{{ titulo }}</p>
   <p>{{ saudacao() }}</p>
   <a v-bind:href="link" v-bind:blabla="link">{{ saudacao() }}</a>
 </div>
@@ -15,7 +15,7 @@
         const link = ref('https://google.com');
 
         const saudacao = function() {
-          console.log(this)
+          this.titulo = "Boa noite!";
           return this.titulo;
         }
 

@@ -1,9 +1,14 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 <div id="app">
-  <p>{{ titulo }}</p>
+  <p v-once>{{ titulo }}</p>
   <p>{{ saudacao() }}</p>
   <a v-bind:href="link" v-bind:blabla="link">{{ saudacao() }}</a>
+  <hr>
+
+  <!-- XSS: ataque -->
+  <p v-html="linkHtml"></p>
+  
 </div>
 
 <script>
@@ -13,16 +18,18 @@
       setup() {
         const titulo = ref('Usando VueJS!');
         const link = ref('https://google.com');
+        const linkHtml = ref('<a href="https://google.com">Google</a>')
 
         const saudacao = function() {
-          console.log(this)
+          this.titulo = "Boa noite!";
           return this.titulo;
         }
 
         return {
           titulo,
           saudacao,
-          link
+          link,
+          linkHtml
         }
       }
     }).mount('#app')
