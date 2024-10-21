@@ -1,0 +1,36 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ contador }}</p>
+  <button v-on:click="somar">Somar 1</button>
+  <p v-on:mousemove="atualizarXY">Mouse: {{ x }} e {{ y }} </p>
+</div>
+
+<script>
+    const { createApp, ref } = Vue
+  
+    createApp({
+      setup() {
+        const contador = ref(0)
+        let x = ref(0)
+        let y = ref(0)
+        const somar = function(event) {
+          // console.log(event)
+          return contador.value++;
+        }
+
+        const atualizarXY = function(e) {
+          x.value = e.clientX
+          y.value = e.clientY
+        }
+
+        return {
+          contador,
+          somar,
+          x,y,
+          atualizarXY
+        }
+      }
+    }).mount('#app')
+  </script>
+  
