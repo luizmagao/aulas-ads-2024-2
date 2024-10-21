@@ -2,7 +2,7 @@
 
 <div id="app">
   <p>{{ contador }}</p>
-  <button v-on:click="somar">Somar 1</button>
+  <button v-on:click="somar(5, $event)">Somar 1</button>
   <p v-on:mousemove="atualizarXY">Mouse: {{ x }} e {{ y }} </p>
 </div>
 
@@ -14,9 +14,9 @@
         const contador = ref(0)
         let x = ref(0)
         let y = ref(0)
-        const somar = function(event) {
-          // console.log(event)
-          return contador.value++;
+        const somar = function(passo, event) {
+          console.log(event)
+          return contador.value += passo;
         }
 
         const atualizarXY = function(e) {
