@@ -1,0 +1,73 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <p v-once>{{ titulo }}</p>
+    <button v-on:click="saudacao">Alerta</button>
+    <button v-on:click="somar(2, $event)">Contador</button>
+    <hr>
+    {{ titulo }}
+    <hr>
+    {{ contador }}
+    <hr>
+    <p v-on:mousemove="atualizarXY">
+        Mouse {{x}} e {{y}}
+        <span v-on:mousemove.stop="">PARAR EVENTO</span>
+    </p>
+    <hr>
+    <a v-on:click="alerta" href="https://google.com">google</a>
+    <hr>
+    <input type="text" v-on:keyup.enter.alt="exibirAlerta">
+</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+
+        const titulo = ref('Hello!')
+        let contador = ref(0)
+        let x = ref(0)
+        let y = ref(0)
+
+        const saudacao = function() {
+            titulo.value = 'Outro termo'
+        }
+
+        const somar = function(passar, event) {
+            console.log(event)
+            contador.value += passar;
+        }
+
+        const atualizarXY = function(event) {
+            x.value = event.clientX
+            y.value = event.clientY
+        }
+
+        const alerta = function(event) {
+            titulo.value = 'Oieee'
+            event.preventDefault()
+        }
+
+        const exibirAlerta = function() {
+            titulo.value = 'Exibir Alerta';
+        }
+
+        // const parar = function(event) {
+        //     event.stopPropagation()
+        // }
+
+      return {
+        titulo,
+        saudacao,
+        contador,
+        somar,
+        atualizarXY,
+        x, y,
+        alerta,
+        exibirAlerta
+        // parar
+      }
+    }
+  }).mount('#app');
+</script>
