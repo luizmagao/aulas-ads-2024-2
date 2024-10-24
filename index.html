@@ -1,0 +1,34 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <input type="text" v-model="titulo">
+    {{ aviso }}
+</div>
+
+<script>
+    const { createApp, ref, reactive, computed, watch, watchEffect } = Vue
+  
+    const vm = createApp({
+      setup() {
+        const titulo = ref('Aprendendo vuejs')
+        const aviso = ref('')
+
+        watch(titulo, (novo, antigo) => {
+            if(novo.length > 5) {
+                aviso.value = 'Seu texto possui mais de 5 caracteres'
+            }
+        })
+
+        watchEffect(() => {
+            if(titulo.value.length > 5) {
+                aviso.value = 'Seu texto possui mais de 5 caracteres'
+            }
+        })
+
+        return {
+          titulo,
+          aviso
+        }
+      }
+    }).mount('#app')
+  </script>
