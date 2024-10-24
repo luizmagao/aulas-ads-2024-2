@@ -1,0 +1,36 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <input type="text" v-model="titulo">
+</div>
+
+<script>
+    const { createApp, ref, watch, watchEffect } = Vue
+  
+    createApp({
+      setup() {
+        const titulo = ref('Usando vuejs')
+
+        watch(titulo, (novo, antigo) => {
+          const amountLetter = novo.length;
+          
+          if(amountLetter >= 10) {
+            alert('Seu input só permite 10 caracteres')
+            titulo.value = novo.slice(0, -1)
+          }
+        })
+
+        watchEffect(() => {
+          if(titulo.value.length >= 10) {
+            alert('Seu input só permite 10 caracteres')
+            titulo.value = titulo.value.slice(0, -1)
+          }
+        })
+
+        return {
+          titulo,
+        }
+      }
+    }).mount('#app')
+  </script>

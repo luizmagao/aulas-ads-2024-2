@@ -1,0 +1,28 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>reactive: {{ user.first_name }} {{ user.last_name }}</p>
+  <p>computed: {{ fullName }}</p>
+</div>
+
+<script>
+    const { createApp, reactive, computed } = Vue
+  
+    createApp({
+      setup() {
+        const user = reactive({
+          first_name: 'Luiz',
+          last_name: 'Lins'
+        })
+
+        const fullName = computed(() => {
+          return `${user.first_name} ${user.last_name}`
+        })
+
+        return {
+          user,
+          fullName
+        }
+      }
+    }).mount('#app')
+  </script>

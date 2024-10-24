@@ -1,0 +1,25 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <p>{{ titulo }}</p>
+  <input type="text" 
+    v-bind:value="titulo"
+    v-on:input="titulo = $event.target.value">
+
+  <input type="text" 
+    v-model="titulo">
+</div>
+
+<script>
+    const { createApp, ref } = Vue
+  
+    createApp({
+      setup() {
+        const titulo = ref('Usando Vuejs!');
+
+        return {
+          titulo
+        }
+      }
+    }).mount('#app')
+  </script>

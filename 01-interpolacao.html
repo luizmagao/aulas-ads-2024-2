@@ -1,0 +1,26 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+    <p>{{ 1 + 2 - 100 * 2 }}</p>
+    <p>{{ contador }}</p>
+    <p>{{ contador > 10 ? 'Maior que 10' : 'Menor que 10'  }}</p>
+    <button v-on:click="somar()">SOMAR</button>
+</div>
+
+<script>
+    const { createApp, ref } = Vue
+  
+    createApp({
+      setup() {
+        const contador = ref(0)
+        const somar = function() {
+          return this.contador++;
+        }
+
+        return {
+          contador,
+          somar
+        }
+      }
+    }).mount('#app')
+  </script>
