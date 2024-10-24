@@ -1,0 +1,45 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">
+  <button v-bind:class="btnAmarelo">Amarelo</button>
+  <button v-on:click="alterarClasse = !alterarClasse" v-bind:class="{ 'btn-amarelo': alterarClasse, 'btn-vermelho': !alterarClasse }">
+    {{ alterarClasse ? 'Amarelo' : 'Vermelho' }}
+  </button>
+  <button v-bind:class="btnClassEnviar">Enviar</button>
+  <button v-bind:class="btnClassLimpar">Limpar</button>
+</div>
+
+<script>
+    const { createApp, ref } = Vue
+  
+    createApp({
+      setup() {
+        const btnAmarelo = 'btn-amarelo'
+        const btnClassEnviar = ref({
+          'btn-amarelo': true
+        })
+        const btnClassLimpar = ref({
+          'btn-amarelo': false,
+        })
+        const alterarClasse = ref(true)
+
+        return {
+          btnAmarelo,
+          btnClassEnviar,
+          btnClassLimpar,
+          alterarClasse
+        }
+      }
+    }).mount('#app')
+  </script>
+
+  <style>
+    .btn-amarelo {
+      background-color: yellow;
+      color: black;
+    }
+    .btn-vermelho {
+      background-color: red;
+      color: white;
+    }
+  </style>
